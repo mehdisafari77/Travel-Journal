@@ -1,4 +1,18 @@
-
+require('dotenv').config()
+const {CONNECTION_STRING} = process.env
+require('sequelize')
+const Sequelize = require('sequelize')
+const {load} = require("dotenv");
+const {createCity} = require("./controller");
+const {query} = require("pg/lib/native");
+const sequelize = new Sequelize(CONNECTION_STRING, {
+    dialect: 'postgres',
+    dialectOptions: {
+        ssl: {
+            rejectUnauthorized: false
+        }
+    }
+});
 
 module.exports = {
     seed: (req, res) => {
